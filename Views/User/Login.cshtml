@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    <input type="text" name="username" />
+    <input type="text" name="password" />
+
+    <input type="submit" />
+
+    <br />
+
+    <p>Registrate <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">AQUI</a>.</p>
+}

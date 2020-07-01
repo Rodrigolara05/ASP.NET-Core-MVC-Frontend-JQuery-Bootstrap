@@ -2,34 +2,87 @@
     ViewData["Title"] = "Register";
 }
 
-@using (Html.BeginForm("Register", "User", FormMethod.Post))
-{
-    <label>Username</label>
-    <input type="text" name="username" />
-    <br />
-    <label>Password</label>
-    <input type="text" name="password" />
-    <br />
-    <label>Email</label>
-    <input type="text" name="email" />
-    <br />
-    <label>Firstname</label>
-    <input type="text" name="firstname" />
-    <br />
-    <label>Lastname</label>
-    <input type="text" name="lastname" />
-    <br />
+<head>
+    <style>
+        .header {
+            color: #36A0FF;
+            font-size: 27px;
+            padding: 10px;
+        }
 
-    <select name="type">
-        <option value="Shopper">Shopper</option>
-        <option value="Publisher">Publisher</option>
-    </select>
-    <br />
-    <br />
-    <input type="submit" />
+        .bigicon {
+            font-size: 35px;
+            color: #36A0FF;
+        }
+    </style>
+</head>
 
-    <br />
+    <body>
 
-    <br />
-    <p>Tienes cuenta? Click <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">AQUI</a>.</p>
-}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                        {
+                            <form class="form-horizontal" method="post">
+                                <fieldset>
+                                    <legend class="text-center header">Registrate</legend>
+
+                                    <div class="form-group" style="height: 40px;">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <input id="fname" name="firstname" type="text" placeholder="First Name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="height: 40px;">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <input id="lname" name="lastname" type="text" placeholder="Last Name" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 40px;">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <input name="username" type="text" placeholder="Username" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 40px;">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <input id="email" name="email" type="text" placeholder="Email Address" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 40px;">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <input name="password" type="password" placeholder="Password" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                        <div class="col-md-8">
+                                            <select name="type">
+                                                <option value="Shopper">Shopper</option>
+                                                <option value="Publisher">Publisher</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="height: 40px;">
+                                        <div class="col-md-12 text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>

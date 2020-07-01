@@ -25,10 +25,10 @@ namespace Event_Soft_FrontEnd.Models
         public string[] Categories { get; set; }
 
         [JsonProperty("start")]
-        public DateTimeOffset Start { get; set; }
+        public string Start { get; set; }
 
         [JsonProperty("end")]
-        public DateTimeOffset End { get; set; }
+        public string End { get; set; }
 
         [JsonProperty("address")]
         public string Address { get; set; }

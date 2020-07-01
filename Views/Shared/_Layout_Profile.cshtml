@@ -439,10 +439,19 @@
                     <!-- Main Menu -->
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="@Url.Action("Information", "User")"><span class="glyphicon glyphicon-user"></span> Mi Perfil @*(@userInformation.Roles.ElementAt(0))*@</a></li>
-                            <li class="active"><a href="@Url.Action("InformationPublisherEvents", "User")"><span class="glyphicon glyphicon-calendar"></span> Mis Eventos</a></li>
-                            <li><a asp-area="" asp-controller="User" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
-
+                            @if (userInformation.Roles.ElementAt(0) == "Publisher")
+                            {
+                                <li class="active"><a href="@Url.Action("Information", "User")"><span class="glyphicon glyphicon-user"></span> Mi Perfil @*(@userInformation.Roles.ElementAt(0))*@</a></li>
+                                <li ><a href="@Url.Action("InformationPublisherEvents", "User")"><span class="glyphicon glyphicon-calendar"></span>Eventos creados</a></li>
+                                <li ><a href="@Url.Action("CreateEvent", "Event")"><span class="glyphicon glyphicon-calendar"></span>Crear Evento</a></li>
+                                <li><a asp-area="" asp-controller="User" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                            }
+                            else
+                            {
+                                <li class="active"><a href="@Url.Action("Information", "User")"><span class="glyphicon glyphicon-user"></span> Mi Perfil @*(@userInformation.Roles.ElementAt(0))*@</a></li>
+                                <li ><a href="@Url.Action("InformationShopperEvents", "User")"><span class="glyphicon glyphicon-calendar"></span>Mis compras</a></li>
+                                <li><a asp-area="" asp-controller="User" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                            }
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>

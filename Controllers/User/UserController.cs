@@ -63,6 +63,20 @@ namespace Event_Soft_FrontEnd.Controllers.User
 
             return result? RedirectToAction("Login") : RedirectToAction("Register");
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("Token", "");
+            HttpContext.Session.SetString("RefreshToken", "");
+            return RedirectToAction("Index", "Event");
+        }
+
+        public IActionResult Information()
+        {
+            string token = HttpContext.Session.GetString("Token");
+            UserModel userModel = UserConnection.InformationUser(token);
+            ViewBag.userInformation = userModel;
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

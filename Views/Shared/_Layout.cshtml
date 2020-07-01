@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,16 +18,31 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Registrar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Iniciar Sesión</a>
-                        </li>
-                    </ul>
-                </div>
+
+                @if (Context.Session.GetString("Token") == null || Context.Session.GetString("Token") == "")
+                {
+                    <div class="navbar d-sm-inline-flex flex-sm-row-reverse justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Registrar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Iniciar Sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                { <div class="navbar d-sm-inline-flex flex-sm-row-reverse justify-content-between">
+                      <ul class="navbar-nav flex-grow-1">
+                          <li class="nav-item">
+                              <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Information">Mi Perfil</a>
+                          </li>
+                      </ul>
+                    </div>
+                }
+
+
             </div>
         </nav>
     </header>

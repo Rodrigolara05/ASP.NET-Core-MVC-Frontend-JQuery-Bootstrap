@@ -66,13 +66,13 @@ namespace Event_Soft_FrontEnd.Controllers.User
             const string endpoint = "auth/shoppers";
             var client = new RestClient(URL);
             var request = new RestRequest(endpoint, Method.POST);
-            
+
             string jsonToSend = SerializeUser.ToJson(new UserModel
             {
                 Username = username,
                 Password = password,
                 Email = email,
-                Firstname = firstname, 
+                Firstname = firstname,
                 Lastname = lastname
             });
 
@@ -104,6 +104,87 @@ namespace Event_Soft_FrontEnd.Controllers.User
 
             return success;
         }
+
+        public static UserModel InformationShopper(string token)
+        {
+            const string endpoint = "auth/shoppers/me";
+            var client = new RestClient(URL);
+            client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
+            var request = new RestRequest(endpoint, Method.GET);
+
+            UserModel result = null;
+
+            try
+            {
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    result = UserModel.FromJson(response.Content);
+
+                    // success = true;
+                }
+                else
+                {
+                    // NOK
+                    Console.Write(response.ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.ToString());
+            }
+
+            return result;
+        }
+        public static UserModel InformationPublisher(string token)
+        {
+            const string endpoint = "auth/publishers/me";
+            var client = new RestClient(URL);
+            client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
+
+            var request = new RestRequest(endpoint, Method.GET);
+            UserModel result = null;
+
+            try
+            {
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    result = UserModel.FromJson(response.Content);
+
+                    // success = true;
+                }
+                else
+                {
+                    // NOK
+                    Console.Write(response.ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.ToString());
+            }
+
+            return result;
+        }
+
+        public static UserModel InformationUser(string token) {
+            UserModel userModel = null;
+            try
+            {
+                userModel = InformationPublisher(token);
+                if (userModel == null) {
+                    userModel = InformationShopper(token);
+                }
+            }
+            catch
+            {
+                userModel = InformationShopper(token);
+            }
+
+            return userModel;
+        }
+
         public static string Login(string username = "", string password = "")
         {
             const string endpoint = "auth/login";

@@ -81,7 +81,8 @@
                                 <img class="card-img-top" src="http://webeventsoft.azurewebsites.net/@eventItem.Image" alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="#">@eventItem.Name</a>
+                                        <a href="@Url.Action("EventDetail", "Event",new {id= eventItem.Id })">@eventItem.Name</a>
+                        
                                     </h4>
                                     @if (eventItem.Zones.Length > 0)
                                     {

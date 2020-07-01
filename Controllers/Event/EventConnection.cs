@@ -42,6 +42,36 @@ namespace Event_Soft_FrontEnd.Controllers.Event
 
             return result;
         }
-    
+        public static EventModel InformationEvent(string id)
+        {
+            string endpoint =  string.Format("events/{0}", id);
+            var client = new RestClient(URL);
+            var request = new RestRequest(endpoint, Method.GET);
+
+            EventModel result = null;
+
+            try
+            {
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    result = EventModel.FromJson(response.Content);
+
+                    // success = true;
+                }
+                else
+                {
+                    // NOK
+                    Console.Write(response.ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.ToString());
+            }
+
+            return result;
+        }
+
     }
 }

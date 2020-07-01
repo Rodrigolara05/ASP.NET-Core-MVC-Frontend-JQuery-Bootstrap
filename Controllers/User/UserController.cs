@@ -75,8 +75,22 @@ namespace Event_Soft_FrontEnd.Controllers.User
             string token = HttpContext.Session.GetString("Token");
             UserModel userModel = UserConnection.InformationUser(token);
             ViewBag.userInformation = userModel;
+ 
             return View();
         }
+
+        public IActionResult InformationPublisherEvents()
+        {
+            string token = HttpContext.Session.GetString("Token");
+            UserModel userModel = UserConnection.InformationPublisherEvent(token);
+            ViewBag.userInformationEvent = userModel;
+            UserModel userModel2 = UserConnection.InformationUser(token);
+            ViewBag.userInformation = userModel2;
+
+            return View();
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

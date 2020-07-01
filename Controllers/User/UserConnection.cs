@@ -168,6 +168,41 @@ namespace Event_Soft_FrontEnd.Controllers.User
             return result;
         }
 
+
+        public static UserModel InformationPublisherEvent(string token)
+        {
+            const string endpoint = "auth/publishers/me/events";
+            var client = new RestClient(URL);
+            client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", token));
+
+            var request = new RestRequest(endpoint, Method.GET);
+            UserModel result = null;
+
+            try
+            {
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    result = UserModel.FromJson(response.Content);
+
+                    // success = true;
+                }
+                else
+                {
+                    // NOK
+                    Console.Write(response.ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.ToString());
+            }
+
+            return result;
+        }
+
+
+
         public static UserModel InformationUser(string token) {
             UserModel userModel = null;
             try

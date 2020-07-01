@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = "_Layout_Profile";
+    ViewData["Title"] = "InformationPublisherEvents";
+     UserModel userInformationEvent = ViewBag.userInformationEvent;
+}
+
+
+
+<div class="col-md-10 content">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Mis Datos
+        </div>
+        <div class="panel-body">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="@userInformationEvent.Username" />
+            <br />
+            <label>Password</label>
+            <input type="text" name="password" placeholder="@userInformationEvent.Password" />
+            <br />
+            <label>Email</label>
+            <input type="text" name="email" placeholder="@userInformationEvent.Email" />
+            <br />
+            <label>Firstname</label>
+            <input type="text" name="firstname" placeholder="@userInformationEvent.Firstname" />
+            <br />
+            <label>Lastname</label>
+            <input type="text" name="lastname" placeholder="@userInformationEvent.Lastname" />
+            <br />
+            <label>Roles</label>
+            <input type="text" name="lastname" placeholder="@userInformationEvent.Roles" />
+            <br />
+            <label>Roles</label>
+            <input type="text" name="lastname" placeholder="@userInformationEvent.Roles" />
+            <br />
+            
+            <input type="submit" value="Update data" />
+        </div>
+    </div>
+</div>
+

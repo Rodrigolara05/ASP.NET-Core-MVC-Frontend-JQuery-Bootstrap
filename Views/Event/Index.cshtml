@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Eventos";
     EventModel[] listEvents = ViewBag.listEvents;
+    CategoryModel[] listCategories = ViewBag.listCategories;
 }
 
 <!DOCTYPE html>
@@ -33,12 +34,23 @@
             <div class="col-lg-3">
 
                 <h1 class="my-4">Categorias Populares</h1>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Categoria 1</a>
-                    <a href="#" class="list-group-item">Categoria 2</a>
-                    <a href="#" class="list-group-item">Categoria 3</a>
-                </div>
-
+                @if (listCategories != null)
+                {
+            <div class="list-group">
+                @foreach (var categoryItem in listCategories)
+                {
+                <a href="@Url.Action("CategoryDetail", "Category",new {name= categoryItem.Name})" class="list-group-item">@categoryItem.Name</a>
+                }
+            </div>
+                }
+                else
+                {
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">Categoria 1</a>
+                        <a href="#" class="list-group-item">Categoria 2</a>
+                        <a href="#" class="list-group-item">Categoria 3</a>
+                    </div>
+                }
             </div>
             <!-- /.col-lg-3 -->
 

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Event_Soft_FrontEnd.Models
 {
-    public partial class Category
+    public partial class CategoryModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -21,15 +21,19 @@ namespace Event_Soft_FrontEnd.Models
         [JsonProperty("events")]
         public EventModel[] Events { get; set; }
     }
-
-    public partial class Category
+    public partial class ListCategoryModel
     {
-        public static Category FromJson(string json) => JsonConvert.DeserializeObject<Category>(json, Event_Soft_FrontEnd.Models.Converter.Settings);
+        public static CategoryModel[] FromJson(string json) => JsonConvert.DeserializeObject<CategoryModel[]>(json, Event_Soft_FrontEnd.Models.Converter.Settings);
+    }
+
+    public partial class CategoryModel
+    {
+        public static CategoryModel FromJson(string json) => JsonConvert.DeserializeObject<CategoryModel>(json, Event_Soft_FrontEnd.Models.Converter.Settings);
     }
 
     public static class SerializeCategory
     {
-        public static string ToJson(this Category self) => JsonConvert.SerializeObject(self, Event_Soft_FrontEnd.Models.Converter.Settings);
+        public static string ToJson(this CategoryModel self) => JsonConvert.SerializeObject(self, Event_Soft_FrontEnd.Models.Converter.Settings);
     }
 
     internal static class Converter

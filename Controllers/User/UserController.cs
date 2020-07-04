@@ -106,6 +106,8 @@ namespace Event_Soft_FrontEnd.Controllers.User
             return View();
         }
 
+       
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

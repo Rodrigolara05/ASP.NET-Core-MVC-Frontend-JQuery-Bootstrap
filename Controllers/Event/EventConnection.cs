@@ -1,4 +1,5 @@
 ﻿using Event_Soft_FrontEnd.Models;
+using Event_Soft_FrontEnd.Models.Authorization;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,60 @@ namespace Event_Soft_FrontEnd.Controllers.Event
             }
 
             return result;
+        }
+        public static bool CreateEvent(string name, string image, CategoryModel[] categories, string start, string end,string address,string referenceLocation ,  Zone[] zona)
+        {
+            const string endpoint = "events/";
+            var client = new RestClient(URL);
+            var request = new RestRequest(endpoint, Method.POST);
+
+            string jsonToSend = SerializeEvent.ToJson(new EventModel
+            {
+
+                Name = name,
+                Image = image,
+                Categories =
+                {
+                    
+                },
+                Start = start,
+                End = end,
+                Address = address,
+                ReferenceLocation = referenceLocation,
+                Zones =
+                {
+                    
+                },
+
+            }); 
+
+            request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.Json;
+
+            bool success = false;
+
+            try
+            {
+                IRestResponse response = client.Execute(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    AuthModel authModel = AuthModel.FromJson(response.Content.ToString());
+                    //SaveToken(authModel);
+                    //SaveRefreshToken(authModel);
+                    success = true;
+                }
+                else
+                {
+                    // NOK
+                    Console.Write(response.ToString());
+                }
+            }
+            catch (Exception error)
+            {
+                Console.Write(error.ToString());
+            }
+
+            return success;
         }
 
     }

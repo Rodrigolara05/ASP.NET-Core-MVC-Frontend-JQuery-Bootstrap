@@ -1,4 +1,5 @@
 ﻿using Event_Soft_FrontEnd.Controllers.Category;
+using Event_Soft_FrontEnd.Controllers.User;
 using Event_Soft_FrontEnd.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,27 @@ namespace Event_Soft_FrontEnd.Controllers.Event
             EventModel eventModel = EventConnection.InformationEvent(id);
             ViewBag.eventInformation = eventModel;
             return View();
+        }
+
+        public IActionResult CreateEvents()
+        {
+            string token = HttpContext.Session.GetString("Token");
+            UserModel userModel = UserConnection.InformationUser(token);
+            ViewBag.userInformation = userModel;
+
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateEvents(string name, string image, CategoryModel[] categories, string start, string end, string address, string referenceLocation, Zone[] zona)
+        {
+            bool result = false;
+           
+            
+           result = EventConnection.CreateEvent(name, image,  categories, start, end, address, referenceLocation, zona);
+            
+
+            return result ? RedirectToAction("InformationPublisherEvent","User") : RedirectToAction("CreateEvents", "Event");
         }
     }
 }

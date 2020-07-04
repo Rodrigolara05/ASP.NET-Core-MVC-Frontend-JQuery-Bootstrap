@@ -14,16 +14,31 @@ namespace Event_Soft_FrontEnd.Controllers.User
     {
         private void SaveToken(AuthModel authModel)
         {
-            HttpContext.Session.SetString("Token", authModel.Token);
+            try { 
+                HttpContext.Session.SetString("Token", authModel.Token); 
+            }
+            catch (Exception)
+            {
+
+            }
         }
         private void SaveRefreshToken(AuthModel authModel)
         {
-            HttpContext.Session.SetString("RefreshToken", authModel.RefreshToken);
+            try
+            {
+                HttpContext.Session.SetString("RefreshToken", authModel.RefreshToken);
+            }
+            catch (Exception)
+            {
+
+            }
+           
         }
 
         private void saveInSession(string response)
         {
             AuthModel authModel = AuthModel.FromJson(response);
+            
             SaveToken(authModel);
             SaveRefreshToken(authModel);
         }
@@ -36,7 +51,8 @@ namespace Event_Soft_FrontEnd.Controllers.User
         public ActionResult Login(string username, string password)
         {
             string result = UserConnection.Login(username,password);
-            saveInSession(result);
+            if (result!="")
+                saveInSession(result);
             
             //string res = HttpContext.Session.GetString("Token");
 

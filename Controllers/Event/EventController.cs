@@ -13,10 +13,10 @@ namespace Event_Soft_FrontEnd.Controllers.Event
     {
         public IActionResult Index()
         {
-          //CategoryModel[] listCategories = CategoryConnection.GetEvents();
+          CategoryModel[] listCategories = CategoryConnection.GetCategories();
             EventModel[] listEvents = EventConnection.GetEvents();
             ViewBag.listEvents = listEvents;
-          //  ViewBag.listCategories = listCategories;
+          ViewBag.listCategories = listCategories;
             return View();
         }
 
